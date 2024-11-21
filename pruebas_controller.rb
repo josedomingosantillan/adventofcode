@@ -32,17 +32,19 @@ class App::Controllers::PruebasController < ApplicationController
     ## 5 1 9 5<7 5 3<2 4 6 8
     return if matrizz == ''
 
-    filas= matrizz.split('|')
+    filas = matrizz.split('|')
 
-    suma=0
+    suma = 0
     filas.each do |valores|
-      valores_fila= valores.split(' ')
+      valores_fila = valores.split(' ')
 
-      valores_fila=valores_fila.map(&to_s)
+      valores_fila.each_with_index do |valor, index|
+        valores_fila[index] = valor.to_i
+      end
 
-      sort_array= valores_fila.sort
+      sort_array = valores_fila.sort
 
-      suma+= (sort_array.last - sort_array.first)
+      suma += (sort_array.last - sort_array.first)
     end
 
     suma
